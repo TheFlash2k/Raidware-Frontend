@@ -553,6 +553,12 @@ body {
   background-color: #444;
   color: whitesmoke;
 }
+.dark-mode .dummy .running{
+  color: green;
+}
+.dark-mode .dummy .not-running{
+  color: red;
+}
 /* Theme Mode */
 .visible {
   display: block;
