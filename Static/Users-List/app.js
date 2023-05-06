@@ -50,3 +50,30 @@ darkModeToggle.addEventListener("click", function () {
     div4.classList.add("hide");
   }
 });
+
+
+
+const create = document.getElementById('create');
+const div5 = document.getElementById("div5");
+const div6 = document.getElementById("div6");
+const createFormPage = document.getElementById('createFormPage');
+
+create.addEventListener('click', () => {
+  createFormPage.classList.toggle('top-position');
+});
+
+
+
+darkModeToggle.addEventListener("click", function () {
+  if (div5.classList.contains("show")) {
+    div5.classList.remove("show");
+    div5.classList.add("hide");
+    div6.classList.remove("hide");
+    div6.classList.add("show");
+  } else {
+    div5.classList.remove("hide");
+    div5.classList.add("show");
+    div6.classList.remove("show");
+    div6.classList.add("hide");
+  }
+});

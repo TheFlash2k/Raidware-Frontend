@@ -21,6 +21,38 @@
     />
   </head>
   <body>
+    <div class="form-page" id="createFormPage">
+      <div class="logo-section-light show" id="div5">
+        <img
+          src="../resources/rd-01.png"
+          alt="logo"
+          class="logo-create-Light"
+          id="createLogoLight"
+        />
+      </div>
+      <div class="logo-section-dark hide" id="div6">
+        <img
+          src="../resources/rd-01 inverted.png"
+          alt="logo"
+          class="logo-create-dark"
+          id="createLogoDark"
+        />
+      </div>
+      <form class="form">
+        <div class="form-scroll">
+        <select name="Protocol" id="protocol">
+          <option value="HTTP">http</option>
+          <option value="TCP">tcp</option>
+          <option value="UDP">udp</option>
+        </select>
+        <input class="input-create-list" type="text" placeholder="Host" required="required">
+        <input class="input-create-list" type="text" placeholder="Port" required="required">
+        <input class="input-create-list" type="text" placeholder="Begin-Delimiter" required="required">
+        <input class="input-create-list" type="text" placeholder="End-Delimiter" required="required">
+        <input type="submit" value="Create User" class="sub-list">
+        </div>
+      </form>
+    </div>
     <div class="toggle-container">
       <input type="checkbox" id="toggle" class="toggle-checkbox" />
       <label for="toggle" class="toggle-label">
@@ -70,6 +102,7 @@
         <div class="content" id="content">
           <div class="user">
             <h2 class="heading" id="mySection">Users List</h2>
+            <button class="create" id="create">Create User</button>
           </div>
           <div class="user-menu">
             <div class="id user-menu-child lmlc1">

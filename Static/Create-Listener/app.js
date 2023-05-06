@@ -6,7 +6,6 @@ const div4 = document.getElementById("div4");
 const div5 = document.getElementById("div5");
 const div6 = document.getElementById("div6");
 const navbar = document.getElementById("navbar");
-const create = document.getElementById('create');
 const show = document.getElementsByClassName("show");
 const hide = document.getElementsByClassName("hide");
 const mySection = document.getElementById('mySection');
