@@ -9,6 +9,10 @@ const hide = document.getElementsByClassName("hide");
 const mySection = document.getElementById('mySection');
 const darkModeToggle = document.getElementById("toggle");
 const stretchButton = document.getElementById("stretchButton");
+const create = document.getElementById('create');
+const div5 = document.getElementById("div5");
+const div6 = document.getElementById("div6");
+const createFormPage = document.getElementById('createFormPage');
 
 darkModeToggle.addEventListener("change", function () {
   body.classList.toggle("dark-mode");
@@ -21,6 +25,10 @@ stretchButton.addEventListener("click", function () {
 
 stretchButton.addEventListener('click', () => {
   mySection.classList.toggle('left-position');
+});
+
+create.addEventListener('click', () => {
+  createFormPage.classList.toggle('top-position');
 });
 
 darkModeToggle.addEventListener("click", function () {
@@ -50,19 +58,6 @@ darkModeToggle.addEventListener("click", function () {
     div4.classList.add("hide");
   }
 });
-
-
-
-const create = document.getElementById('create');
-const div5 = document.getElementById("div5");
-const div6 = document.getElementById("div6");
-const createFormPage = document.getElementById('createFormPage');
-
-create.addEventListener('click', () => {
-  createFormPage.classList.toggle('top-position');
-});
-
-
 
 darkModeToggle.addEventListener("click", function () {
   if (div5.classList.contains("show")) {
