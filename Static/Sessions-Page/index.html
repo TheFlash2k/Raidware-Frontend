@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agents List</title>
+    <title>Sessions</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -103,8 +103,8 @@
             </div>
             <div class="agent-items">
               <div class="agent-items-scroll">
+
                 <div class="dummy dummy1" id="dummy1">
-                  
                   <div class="dummy-stretch1 dummy-stretch">
                   <div class="dummy-child dummy-child1">Y5qKuB</div>
                   <div class="dummy-child dummy-child1">Just Now</div>
@@ -158,24 +158,26 @@
                 </div>
                 </div>
                 </div>
-                  
-                </div>
 
-                <div class="dummy dummy2">
-                  <div class="dummy-stretch1 dummy-stretch">
-                  <div class="dummy-child dummy-child2">LXtlEO</div>
-                  <div class="dummy-child dummy-child2">10 Minutes Ago</div>
-                  <div class="dummy-child dummy-child2">HTTP</div>
-                  <div class="dummy-child dummy-child2">zsh</div>
-                  <div class="dummy-child dummy-child2">48</div>
+
+
+
+                <div class="dummy dummy2" id="dummy2">
+                  <div class="dummy-stretch2 dummy-stretch">
+                    <div class="dummy-child dummy-child2">LXtlEO</div>
+                    <div class="dummy-child dummy-child2">10 Minutes Ago</div>
+                    <div class="dummy-child dummy-child2">HTTP</div>
+                    <div class="dummy-child dummy-child2">zsh</div>
+                    <div class="dummy-child dummy-child2">48</div>
                   <div class="dummy-child dummy-child2 os-icons">
                     <i class="fa-brands fa-linux fa-2x"></i>
                   </div>
                   <div class="dummy-child dummy-child2">HTTP-Pub</div>
                   <div class="dummy-child dummy-child2">/tmp/msf</div>
-                  <div class="dummy-child dummy-child2 icons-dummy">
+                  <div class="dummy-child dummy-child2 icons-dummy i-d2">
                     <div class="terminal-dummy dummy-icon">
-                      <i class="fa-solid fa-terminal"></i>
+                      <i class="fa-solid fa-terminal" id="terminal2"></i>
+                      <i class="fa-solid fa-circle-xmark fa-2x"  id="closeTerminal2"></i>
                     </div>
                     <div class="download-dummy dummy-icon">
                       <i class="fa-solid fa-download"></i>
@@ -191,7 +193,30 @@
                     </div>
                   </div>
                 </div>
+                <div class="cmd" id="cmd2">
+                  <div class="cmd-scroll">
+                    <div>
+                      <span>>> </span> whoami<br />
+                      <span>[+]</span> Tasked Agent <span id="base">Y5qKub</span> to run: whoami
+                      <br />
+                      <span>[+]</span> Command output received:
+                      <br />
+                        theflash-pc\alitaqi
+                      <br /><br />
+                    </div>
+                    <div>
+                      <span>>> </span> pwd<br />
+                      <span>[+]</span> Tasked Agent <span id="base">Y5qKub</span> to run: pwd
+                      <br />
+                      <span>[+]</span> Command output received:
+                      <br />
+                        C:\users\
+                      <br /><br />
+                    </div>
                 </div>
+                </div>
+                </div>
+              </div>
               </div>
             </div>
           </div>

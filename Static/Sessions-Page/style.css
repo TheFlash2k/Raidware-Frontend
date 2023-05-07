@@ -229,6 +229,9 @@ body {
 .agent-items-scroll .dummy1{
   height: 50px;
 }
+.agent-items-scroll .dummy2{
+  height: 50px;
+}
 .cmd{
   display: block;
   height: 350px;
@@ -357,6 +360,26 @@ body {
   color: black;
 }
 .i-d .fa-circle-xmark{
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: grey;
+  font-size: 1rem;
+}
+.i-d2 .fa-terminal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: grey;
+  font-size: 1rem;
+}
+.terminal-dummy:hover .fa-terminal {
+  color: black;
+}
+.i-d2 .fa-circle-xmark{
   display: none;
   position: absolute;
   top: 50%;
