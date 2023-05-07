@@ -191,7 +191,6 @@ body {
   align-items: flex-end;
   flex-direction: column;
   background: #faf9f9;
-  /* box-shadow: 0 0 10px #edecec; */
   transition: 0.3s ease-in-out;
 }
 .card h4{
@@ -246,7 +245,6 @@ body {
 .total-user-map{
   border-radius: 8px;
   overflow: hidden;
-  /* box-shadow: 0 0 10px rgb(204, 226, 234); */
   height: 300px;
 }
 .pie-chart{
