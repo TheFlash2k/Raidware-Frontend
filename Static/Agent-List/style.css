@@ -6,6 +6,7 @@
 body {
   font-family: "Poppins", sans-serif;
   position: relative;
+  overflow: hidden;
 }
 .logo-light{
   position: absolute;
@@ -38,7 +39,7 @@ body {
   object-fit: cover;
 }
 /* Light Mode */
-.Stagers {
+.agents {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -147,7 +148,7 @@ body {
   flex-wrap: nowrap;
   overflow: hidden;
 }
-.stager {
+.agent {
   width: 100%;
   height: 70px;
   background-color: #fff;
@@ -166,7 +167,28 @@ body {
   left: 10px;
   transition: 0.3s ease-in-out;
 }
-.stager-menu {
+.create {
+  position: absolute;
+  width: 120px;
+  height: 30px;
+  right: 20px;
+  top: 25px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  color: whitesmoke;
+  font-weight: 700;
+  background-color: dodgerblue;
+  transition: 0.3s ease-in-out;
+}
+.create:hover {
+  cursor: pointer;
+  color: white;
+}
+.create:active {
+  color: black;
+}
+.agent-menu {
   border-bottom: #333 0.1px solid;
   width: 100%;
   height: 50px;
@@ -177,20 +199,20 @@ body {
   padding-right: 40px;
   transition: 0.3s ease-in-out;
 }
-.stager-menu-child {
+.agent-menu-child {
   width: 150px;
   text-align: start;
   color: #333;
   font-size: 10px;
   transition: 0.3s ease-in-out;
 }
-.stager-menu-child:hover i {
+.agent-menu-child:hover i {
   color: dodgerblue;
 }
-.stager-menu-child:hover {
+.agent-menu-child:hover {
   cursor: pointer;
 }
-.stager-items {
+.agent-items {
   align-self: flex-end;
   justify-self: flex-end;
   width: 100%;
@@ -200,7 +222,7 @@ body {
   overflow-x: hidden;
   transition: 0.3s ease-in-out;
 }
-.stager-items-scroll {
+.agent-items-scroll {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -208,7 +230,7 @@ body {
   align-items: center;
   overflow: hidden;
 }
-.stager-items::-webkit-scrollbar {
+.agent-items::-webkit-scrollbar {
   display: none;
 }
 .dummy {
@@ -277,26 +299,49 @@ body {
   color: inherit;
   transition: 0.3s ease-in-out;
 }
-.dark-mode .stager {
+.dark-mode .create {
+  color: #333;
+  background-color: lightblue;
+  transition: 0.3s ease-in-out;
+}
+.dark-mode .create:active {
+  color: white;
+  transition: 0s;
+}
+.dark-mode .agent {
   background-color: #23242a;
   color: #fff;
   transition: 0.3s ease-in-out;
 }
-.dark-mode .stager-menu{
+.dark-mode .agent-menu{
   background-color: #23242a;
   transition: 0.3s ease-in-out;
 }
-.dark-mode .stager-menu-child{
+.dark-mode .agent-menu-child{
   color: #fff;
   transition: 0.3s ease-in-out;
 }
-.dark-mode .stager-items{
+.dark-mode .agent-items{
   background-color: #23242a;
   transition: 0.3s ease-in-out;
 }
 .dark-mode .dummy-child{
   color: #fff;
   transition: 0.3s ease-in-out;
+}
+.dark-mode .form-page {
+  background-color: #333;
+  color: whitesmoke;
+  border-top: 1px #fff solid;
+  transition: 0.5s ease-in-out;
+}
+.dark-mode .form-page input {
+  background-color: #444;
+  color: whitesmoke;
+}
+.dark-mode .form-scroll select {
+  background-color: #444;
+  color: whitesmoke;
 }
 /* Theme Mode */
 .visible {
@@ -375,4 +420,111 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+/* Create */
+.form-page {
+  position: absolute;
+  width: 100%;
+  height: 550px;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: whitesmoke;
+  border-top: 1px #333 solid;
+  bottom: -550px;
+  z-index: 9999;
+  transition: 0.5s ease-in-out;
+}
+.top-position {
+  bottom: 0px;
+}
+.logo-section-light {
+  margin-top: 20px;
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  left: 50%;
+  transform: translate(-50%);
+  overflow: hidden;
+}
+.logo-create-Light {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.logo-section-dark {
+  margin-top: 20px;
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  left: 50%;
+  transform: translate(-50%);
+  overflow: hidden;
+}
+.logo-create-dark {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.form {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: 50%;
+  height: 350px;
+  top: 120px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.form-scroll {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: start;
+}
+.form::-webkit-scrollbar {
+  display: none;
+}
+.form-scroll select {
+  margin: 10px;
+  background-color: lightgrey;
+  padding: none;
+  padding: 9px 25px;
+  color: black;
+  cursor: pointer;
+  font-size: 0.9em;
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: none;
+  outline: none;
+  border: none;
+}
+.form-scroll .input-create-list {
+  width: 50%;
+  margin: 10px;
+  height: 50px;
+  border-radius: 50px;
+  padding-left: 20px;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  background-color: lightgrey;
+  color: black;
+}
+.sub-list {
+  margin: 10px;
+  background-color: lightgrey;
+  padding: none;
+  padding: 9px 25px;
+  color: black;
+  cursor: pointer;
+  font-size: 0.9em;
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: none;
+  outline: none;
+  border: none;
+}
+.sub-list:active {
+  opacity: 0.8;
 }

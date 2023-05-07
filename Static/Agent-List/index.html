@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stagers</title>
+    <title>Agents</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,6 +21,38 @@
     />
   </head>
   <body>
+    <div class="form-page" id="createFormPage">
+      <div class="logo-section-light show" id="div5">
+        <img
+          src="../resources/rd-01.png"
+          alt="logo"
+          class="logo-create-Light"
+          id="createLogoLight"
+        />
+      </div>
+      <div class="logo-section-dark hide" id="div6">
+        <img
+          src="../resources/rd-01 inverted.png"
+          alt="logo"
+          class="logo-create-dark"
+          id="createLogoDark"
+        />
+      </div>
+      <form class="form">
+        <div class="form-scroll">
+        <select name="Protocol" id="protocol">
+          <option value="HTTP">http</option>
+          <option value="TCP">tcp</option>
+          <option value="UDP">udp</option>
+        </select>
+        <input class="input-create-list" type="text" placeholder="Host" required="required">
+        <input class="input-create-list" type="text" placeholder="Port" required="required">
+        <input class="input-create-list" type="text" placeholder="Begin-Delimiter" required="required">
+        <input class="input-create-list" type="text" placeholder="End-Delimiter" required="required">
+        <input type="submit" value="Create Agent" class="sub-list">
+        </div>
+      </form>
+    </div>
     <div class="toggle-container">
       <input type="checkbox" id="toggle" class="toggle-checkbox" />
       <label for="toggle" class="toggle-label">
@@ -34,7 +66,7 @@
     <div class="logo-dark hide" id="div4">
       <img src="../resources/rd-01 inverted 1.png" alt="LOGO" />
     </div>
-    <div class="Stagers">
+    <div class="agents">
       <div class="container">
         <div class="navbar" id="navbar">
           <div class="navbar-logo-light visible" id="div1">
@@ -68,29 +100,30 @@
           </div>
         </div>
         <div class="content" id="content">
-          <div class="stager">
+          <div class="agent">
             <h2 class="heading" id="mySection">Agents</h2>
+            <button class="create" id="create">Create Agent</button>
           </div>
-          <div class="stager-menu">
-            <div class="name stager-menu-child">
+          <div class="agent-menu">
+            <div class="name agent-menu-child">
               Name &nbsp;<i class="fa-solid fa-up-down"></i>
             </div>
-            <div class="listener stager-menu-child">
+            <div class="listener agent-menu-child">
               Listener &nbsp;<i class="fa-solid fa-up-down"></i>
             </div>
-            <div class="language stager-menu-child">
+            <div class="language agent-menu-child">
               Language &nbsp;<i class="fa-solid fa-up-down"></i>
             </div>
-            <div class="safechecks stager-menu-child">
+            <div class="safechecks agent-menu-child">
               SafeChecks &nbsp;<i class="fa-solid fa-up-down"></i>
             </div>
-            <div class="created-at stager-menu-child">
+            <div class="created-at agent-menu-child">
               Created At &nbsp;<i class="fa-solid fa-up-down"></i>
             </div>
-            <div class="operations stager-menu-child">Operations</div>
+            <div class="operations agent-menu-child">Operations</div>
           </div>
-          <div class="stager-items">
-            <div class="stager-items-scroll">
+          <div class="agent-items">
+            <div class="agent-items-scroll">
               <!-- <div class="dummy">
                 <div class="dummy-child">Ali Taqi Wajid</div>
                 <div class="dummy-child">4 Days Ago</div>
