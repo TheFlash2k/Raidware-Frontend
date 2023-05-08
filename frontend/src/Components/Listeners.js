@@ -11,7 +11,7 @@ export default function Listeners() {
 
     const [enabledlisteners, setEnabledListeners] = useState([]);
     const [listeners, setListeners] = useState([]);
-    const [selectedListener, setSelectedListener] = useState('');
+    const [selectedProtocol, setSelectedProtocol] = useState('');
 
     useEffect(() => {
         const url = "http://localhost:5000/v1/enabled";
@@ -19,7 +19,7 @@ export default function Listeners() {
         axios.get(url, {
             headers: {  
                 // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3MDMyNywianRpIjoiMjhjY2EyNGEtYjU0NS00NTVjLWJiNzctMjIyMDg4ZDhlNTcyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTcwMzI3LCJjc3JmIjoiOTM2ZDRmNDUtOGE4Yy00ZDNhLTk5N2MtNjVhZWUxYTBiZGQwIiwiZXhwIjoxNjgzNjU2NzI3fQ.qaNMI7maTS4tXeOLimjAYgDwg85waUUV5L9mGNQ4Yuw'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
             }
         })
         .then((response) => {
@@ -34,7 +34,7 @@ export default function Listeners() {
         axios.get(url2, {
             headers: {
                 // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3MDMyNywianRpIjoiMjhjY2EyNGEtYjU0NS00NTVjLWJiNzctMjIyMDg4ZDhlNTcyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTcwMzI3LCJjc3JmIjoiOTM2ZDRmNDUtOGE4Yy00ZDNhLTk5N2MtNjVhZWUxYTBiZGQwIiwiZXhwIjoxNjgzNjU2NzI3fQ.qaNMI7maTS4tXeOLimjAYgDwg85waUUV5L9mGNQ4Yuw'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
             }
         })
         .then((response) => {
@@ -54,6 +54,20 @@ export default function Listeners() {
         const div3 = document.getElementById("div3");
         const div4 = document.getElementById("div4");
 
+         
+        if (div3.classList.contains("show")) {
+            div3.classList.remove("show");
+            div3.classList.add("hide");
+            div4.classList.remove("hide");
+            div4.classList.add("show");
+          }
+         else {
+            div3.classList.remove("hide");
+            div3.classList.add("show");
+            div4.classList.remove("show");
+            div4.classList.add("hide");
+          }
+
 
         if (div1.classList.contains("visible")) {
             div1.classList.remove("visible");
@@ -67,17 +81,7 @@ export default function Listeners() {
             div2.classList.add("hidden");
           }
 
-          if (div3.classList.contains("show")) {
-            div3.classList.remove("show");
-            div3.classList.add("hide");
-            div4.classList.remove("hide");
-            div4.classList.add("show");
-          } else {
-            div3.classList.remove("hide");
-            div3.classList.add("show");
-            div4.classList.remove("show");
-            div4.classList.add("hide");
-          }
+          
         }
 
         const handleNav = () => {
@@ -108,6 +112,123 @@ export default function Listeners() {
             createFormPage.classList.toggle('top-position');
         }
 
+        const ListenerSetup = (e) => {
+            listeners.map((listener) => {
+                if (listener.protocol === e.target.value) {
+                    document.getElementById('input-host').value = listener.config.host;
+                    document.getElementById('input-port').value = listener.config.port;
+                    document.getElementById('input-begin-delimiter').value = listener.config.begin_delimiter;
+                    document.getElementById('input-end-delimiter').value = listener.config.end_delimiter;
+                    setSelectedProtocol(e.target.value);
+                }
+            })
+        }
+
+        const handleCreateListenerSubmit = () => {
+            const name = document.getElementById('input-name').value;
+            const host = document.getElementById('input-host').value;
+            const port = parseInt(document.getElementById('input-port').value, 10);
+            const begin_delimiter = document.getElementById('input-begin-delimiter').value;
+            const end_delimiter = document.getElementById('input-end-delimiter').value;
+
+            const data = {
+                'listener': {
+                    'name': name,
+                    'protocol': selectedProtocol,
+                    'type': 'non-staged',
+                    'config': {
+                        'host': host,
+                        'port': port,
+                        'begin_delimiter': begin_delimiter,
+                        'end_delimiter': end_delimiter
+                    }
+                }
+            }
+
+
+
+            axios.post('http://localhost:5000/v1/prepare', data, {
+                headers: {
+                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+            }
+            })
+            .then((response) => {
+                console.log(response);
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+
+        const handleEnable = (e, id) => {
+            console.log(id);
+            const data = {  
+                'LID': id
+            }
+            axios.post('http://localhost:5000/v1/enable', data, {
+                headers: {
+                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+            }
+            })
+            .then((response) => {
+                console.log(response);
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+
+        const handleDisable = (e, id) => {
+            const data = {
+                'LID': id
+            }
+
+            axios.post('http://localhost:5000/v1/disable', data, {
+                headers: {
+                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+            }
+            })
+            .then((response) => {
+                console.log(response);
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+
+        const handleDelete = (e, id) => {
+            const data = {
+                'LID': id
+            }
+
+            axios.post('http://localhost:5000/v1/delete', data, {
+                headers: {
+                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+            }
+            })
+            .then((response) => {
+                console.log(response);
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -134,18 +255,18 @@ export default function Listeners() {
                 </div>
                 <form class="form">
                 <div class="form-scroll">
-                <select name="Protocol" id="protocol" onChange={e => setSelectedListener(e.target.value)}>
+                <select name="Protocol" id="protocol" onChange={e => ListenerSetup(e)}>
+                    <option >Select a Protocol</option>
                     { listeners.map((listener) => (
                     <option value={listener.protocol}>{listener.protocol}</option>
                     ))}
                 </select>
-                { listeners.map((listener) => (
-                <input class="input-create-list" type="text" placeholder="Host" required="required" />
-                <input class="input-create-list" type="text" placeholder="Port" required="required" />
-                <input class="input-create-list" type="text" placeholder="Begin-Delimiter" required="required" />
-                <input class="input-create-list" type="text" placeholder="End-Delimiter" required="required" />
-                <input type="submit" value="Create Listener" class="sub-list" />
-                ))}
+                <input class="input-create-list" id="input-name" type="text" placeholder="Name" required />        
+                <input class="input-create-list" id="input-host" type="text" placeholder="Host" required />
+                <input class="input-create-list" id="input-port" type="text" placeholder="Port" required />
+                <input class="input-create-list" id="input-begin-delimiter" type="text" placeholder="Begin-Delimiter" required />
+                <input class="input-create-list" id="input-end-delimiter" type="text" placeholder="End-Delimiter" required />
+                <input onClick={handleCreateListenerSubmit} value="Create Listener" class="sub-list" />
 
                 </div>
                 </form>
@@ -188,7 +309,7 @@ export default function Listeners() {
                     <a href="/">
                     <i className="fa-solid fa-coins"></i> &nbsp; &nbsp; Loot</a
                     >
-                    <a href="/">
+                    <a href="/users">
                     <i className="fa-solid fa-user"></i> &nbsp; &nbsp; Users</a
                     >
                     <a href="/">
@@ -241,13 +362,13 @@ export default function Listeners() {
                         }
                         <div className="dummy-child icons-dummy">
                         <div className="play-dummy dummy-icon">
-                            <i className="fa-solid fa-play fa-lg"></i>
+                            <i onClick={e => handleEnable(e, listener.LID)} className="fa-solid fa-play fa-lg"></i>
                         </div>
                         <div className="pause-dummy dummy-icon">
-                            <i className="fa-solid fa-pause fa-lg"></i>
+                            <i onClick={e => handleDisable(e, listener.LID)} className="fa-solid fa-pause fa-lg"></i>
                         </div>
                         <div className="delete-dummy dummy-icon">
-                            <i className="fa-solid fa-trash fa-lg"></i>
+                            <i onClick={e => handleDelete(e, listener.LID)} className="fa-solid fa-trash fa-lg"></i>
                         </div>
                         <div className="edit-dummy dummy-icon">
                             <i className="fa-solid fa-pen-to-square fa-lg"></i>
