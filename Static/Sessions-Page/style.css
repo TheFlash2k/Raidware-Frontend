@@ -48,6 +48,7 @@ body {
   height: 100%;
 }
 .navbar {
+  position: relative;
   width: 50px;
   background-color: whitesmoke;
   color: #333;
@@ -138,6 +139,11 @@ body {
 }
 .stretched .arrow-icon {
   transform: rotate(-135deg);
+}
+.navbar .logout{
+  position: absolute;
+  top: 90vh;
+  left: 12px;
 }
 .content {
   position: relative;
