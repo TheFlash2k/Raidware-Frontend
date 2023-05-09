@@ -139,6 +139,11 @@ body {
 .stretched .arrow-icon {
   transform: rotate(-135deg);
 }
+.navbar .logout{
+  position: absolute;
+  top: 90vh;
+  left: 12px;
+}
 .content {
   position: relative;
   display: flex;
