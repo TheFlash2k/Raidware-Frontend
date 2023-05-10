@@ -39,6 +39,25 @@
             id="div2"
           />
         </div>
+        <div class="url-sec">
+          <input
+            class="input-url-disabled"
+            type="url"
+            name=""
+            id="login-url-dis"
+            placeholder="https://"
+            required="required"
+            disabled="disabled"
+          />
+          <input
+            class="input-url"
+            type="url"
+            name=""
+            id="login-url"
+            placeholder="Teamserver URL"
+            required="required"
+          />
+        </div>
         <input
           class="input"
           type="email"
@@ -51,7 +70,7 @@
           type="text"
           name=""
           id="login-user"
-          placeholder="User"
+          placeholder="Username"
           required="required"
         />
         <input
@@ -78,18 +97,8 @@
           placeholder="Team Password"
           required="required"
         />
-        <label for="check-light">
-          <input
-            class="check"
-            type="checkbox"
-            name="remember"
-            id="login-remember"
-            placeholder="remember"
-            required="required"
-          />
-          Accept Terms & Conditions
-        </label>
-        <input type="submit" value="Submit" class="button" id="login-submit" />
+        
+        <input type="submit" value="Register" class="button" id="login-submit" />
       </form>
     </div>
     <script src="./app.js"></script>
