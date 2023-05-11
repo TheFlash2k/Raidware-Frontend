@@ -17,7 +17,7 @@ export default function Users() {
     axios.get(url, {
       headers: {
         // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
             }
     }).then((response) => {
       setUsers(response.data.users);
@@ -152,13 +152,13 @@ export default function Users() {
                   <a href="/">
                     <i className="fa-solid fa-headphones"></i> &nbsp; &nbsp; Listeners</a
                   >
-                  <a href="/">
+                  <a href="/sessions">
                     <i className="fa-solid fa-briefcase"></i> &nbsp; &nbsp; Session</a
                   >
                   <a href="/">
                     <i className="fa-solid fa-users"></i> &nbsp; &nbsp; Agents</a
                   >
-                  <a href="/">
+                  <a href="/loot">
                     <i className="fa-solid fa-coins"></i> &nbsp; &nbsp; Loot</a
                   >
                   <a href="/users">

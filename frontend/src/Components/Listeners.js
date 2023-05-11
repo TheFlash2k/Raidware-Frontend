@@ -19,7 +19,7 @@ export default function Listeners() {
         axios.get(url, {
             headers: {  
                 // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
             }
         })
         .then((response) => {
@@ -34,7 +34,7 @@ export default function Listeners() {
         axios.get(url2, {
             headers: {
                 // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
             }
         })
         .then((response) => {
@@ -150,7 +150,7 @@ export default function Listeners() {
             axios.post('http://localhost:5000/v1/prepare', data, {
                 headers: {
                     // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
             }
             })
             .then((response) => {
@@ -170,7 +170,7 @@ export default function Listeners() {
             axios.post('http://localhost:5000/v1/enable', data, {
                 headers: {
                     // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
             }
             })
             .then((response) => {
@@ -190,7 +190,7 @@ export default function Listeners() {
             axios.post('http://localhost:5000/v1/disable', data, {
                 headers: {
                     // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
             }
             })
             .then((response) => {
@@ -210,7 +210,7 @@ export default function Listeners() {
             axios.post('http://localhost:5000/v1/delete', data, {
                 headers: {
                     // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzU3Nzc4MSwianRpIjoiODQ5N2VlNGMtOTZlNS00Yzc5LTg5YWMtZTcyZTVkYWMwYmU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNTc3NzgxLCJjc3JmIjoiMzM2YjNmZDYtY2U5Yy00NmM4LTkxNmMtODU5OTcxNGQ5NTJiIiwiZXhwIjoxNjgzNjY0MTgxfQ.ChJNgpuCpXJVSv_-7RynL5Pe8qED955xat7YD_D3gI4'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
             }
             })
             .then((response) => {
@@ -300,7 +300,7 @@ export default function Listeners() {
                     <a href="/">
                     <i className="fa-solid fa-headphones"></i> &nbsp; &nbsp; Listeners</a
                     >
-                    <a href="/">
+                    <a href="/sessions">
                     <i className="fa-solid fa-briefcase"></i> &nbsp; &nbsp; Session</a
                     >
                     <a href="/">
