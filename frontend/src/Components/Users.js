@@ -3,7 +3,7 @@ import rd01 from './resources/rd-01 1.png';
 import rd02 from './resources/rd-01 inverted 1.png';
 import rd03 from './resources/rd-01.png';
 import rd04 from './resources/rd-01 inverted.png';
-import './Users.css';
+import './styles/Users.css';
 import axios from "axios";
 
 
@@ -12,13 +12,12 @@ export default function Users() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const url = "http://localhost:5000/v1/users";
+    const url = localStorage.getItem("url") + "/users";
 
     axios.get(url, {
       headers: {
-        // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
-            }
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
     }).then((response) => {
       setUsers(response.data.users);
       console.log(response.data);
@@ -27,8 +26,6 @@ export default function Users() {
     });
   }, []);
     
-
-
   const handleDark = () => {
     const div1 = document.getElementById("div1");
     const div2 = document.getElementById("div2");
@@ -149,13 +146,13 @@ export default function Users() {
                   <span className="arrow-icon"></span>
                 </button>
                 <div className="a-tags">
-                  <a href="/">
+                  <a href="/listeners">
                     <i className="fa-solid fa-headphones"></i> &nbsp; &nbsp; Listeners</a
                   >
                   <a href="/sessions">
                     <i className="fa-solid fa-briefcase"></i> &nbsp; &nbsp; Session</a
                   >
-                  <a href="/">
+                  <a href="/agents">
                     <i className="fa-solid fa-users"></i> &nbsp; &nbsp; Agents</a
                   >
                   <a href="/loot">
@@ -164,9 +161,12 @@ export default function Users() {
                   <a href="/users">
                     <i className="fa-solid fa-user"></i> &nbsp; &nbsp; Users</a
                   >
-                  <a href="/">
+                  <a href="/settings">
                     <i className="fa-solid fa-gear"></i> &nbsp; &nbsp; Settings</a
                   >
+                  <a href="/logout" className="logout">
+                    <i className="fa-solid fa-right-from-bracket"></i> &nbsp; &nbsp; Log-out</a
+                >
                 </div>
               </div>
               <div className="content" id="content">

@@ -3,7 +3,7 @@ import rd01 from './resources/rd-01 1.png';
 import rd02 from './resources/rd-01 inverted 1.png';
 import rd03 from './resources/rd-01.png';
 import rd04 from './resources/rd-01 inverted.png';
-import './Listeners.css'
+import './styles/Listeners.css'
 import axios from "axios";
 
 
@@ -13,28 +13,36 @@ export default function Listeners() {
     const [listeners, setListeners] = useState([]);
     const [selectedProtocol, setSelectedProtocol] = useState('');
 
+    // Check if the user is logged in i.e. the token in localStorage is valid:
+
     useEffect(() => {
-        const url = "http://localhost:5000/v1/enabled";
+
+        if(localStorage.getItem('token') === null || localStorage.getItem('url') === null) {
+            window.location.replace("/login");
+        }
+
+        const url = localStorage.getItem('url') + "/enabled";
     
         axios.get(url, {
             headers: {  
-                // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         })
         .then((response) => {
             setEnabledListeners(response.data.listeners);
         })
         .catch((error) => {
-            console.log(error);
+            // console.log(error);
+            if(error.response.status === 401) {
+                window.location.replace("/login");
+            }
         });
 
-        const url2 = "http://localhost:5000/v1/listeners";
+        const url2 = localStorage.getItem('url') + "/listeners";
 
         axios.get(url2, {
             headers: {
-                // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         })
         .then((response) => {
@@ -117,8 +125,9 @@ export default function Listeners() {
                 if (listener.protocol === e.target.value) {
                     document.getElementById('input-host').value = listener.config.host;
                     document.getElementById('input-port').value = listener.config.port;
-                    document.getElementById('input-begin-delimiter').value = listener.config.begin_delimiter;
+                    document.getElementById('input-begin-delimiter').value = listener.config['begin_delimiter'];
                     document.getElementById('input-end-delimiter').value = listener.config.end_delimiter;
+                    document.getElementById('input-encryption-key').value = listener.config['encryption-key'];
                     setSelectedProtocol(e.target.value);
                 }
             })
@@ -130,6 +139,7 @@ export default function Listeners() {
             const port = parseInt(document.getElementById('input-port').value, 10);
             const begin_delimiter = document.getElementById('input-begin-delimiter').value;
             const end_delimiter = document.getElementById('input-end-delimiter').value;
+            const encryption_key = document.getElementById('input-encryption-key').value;
 
             const data = {
                 'listener': {
@@ -140,17 +150,17 @@ export default function Listeners() {
                         'host': host,
                         'port': port,
                         'begin_delimiter': begin_delimiter,
-                        'end_delimiter': end_delimiter
+                        'end_delimiter': end_delimiter,
+                        'encryption-key' : encryption_key
                     }
                 }
             }
 
 
 
-            axios.post('http://localhost:5000/v1/prepare', data, {
+            axios.post(localStorage.getItem("url") + '/prepare', data, {
                 headers: {
-                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
             })
             .then((response) => {
@@ -167,10 +177,9 @@ export default function Listeners() {
             const data = {  
                 'LID': id
             }
-            axios.post('http://localhost:5000/v1/enable', data, {
+            axios.post(localStorage.getItem("url") + '/enable', data, {
                 headers: {
-                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
             })
             .then((response) => {
@@ -187,10 +196,9 @@ export default function Listeners() {
                 'LID': id
             }
 
-            axios.post('http://localhost:5000/v1/disable', data, {
+            axios.post(localStorage.getItem('url') + '/disable', data, {
                 headers: {
-                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
             })
             .then((response) => {
@@ -207,10 +215,9 @@ export default function Listeners() {
                 'LID': id
             }
 
-            axios.post('http://localhost:5000/v1/delete', data, {
+            axios.post(localStorage.getItem('url') + '/delete', data, {
                 headers: {
-                    // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
             })
             .then((response) => {
@@ -221,19 +228,7 @@ export default function Listeners() {
                 console.log(error);
             });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     return(
         <div>
             <div  class="form-page" id="createFormPage">
@@ -266,6 +261,7 @@ export default function Listeners() {
                 <input class="input-create-list" id="input-port" type="text" placeholder="Port" required />
                 <input class="input-create-list" id="input-begin-delimiter" type="text" placeholder="Begin-Delimiter" required />
                 <input class="input-create-list" id="input-end-delimiter" type="text" placeholder="End-Delimiter" required />
+                <input class="input-create-list" id="input-encryption-key" type="text" placeholder="Encryption Key" required />
                 <input onClick={handleCreateListenerSubmit} value="Create Listener" class="sub-list" />
 
                 </div>
@@ -297,26 +293,26 @@ export default function Listeners() {
                     <span className="arrow-icon"></span>
                 </button>
                 <div className="a-tags">
-                    <a href="/">
+                    <a href="/listeners">
                     <i className="fa-solid fa-headphones"></i> &nbsp; &nbsp; Listeners</a
                     >
                     <a href="/sessions">
                     <i className="fa-solid fa-briefcase"></i> &nbsp; &nbsp; Session</a
                     >
-                    <a href="/">
+                    <a href="/agents">
                     <i className="fa-solid fa-users"></i> &nbsp; &nbsp; Agents</a
                     >
-                    <a href="/">
+                    <a href="/loot">
                     <i className="fa-solid fa-coins"></i> &nbsp; &nbsp; Loot</a
                     >
                     <a href="/users">
                     <i className="fa-solid fa-user"></i> &nbsp; &nbsp; Users</a
                     >
-                    <a href="/">
+                    <a href="/settings">
                     <i className="fa-solid fa-gear"></i> &nbsp; &nbsp; Settings</a
                     >
                 </div>
-                <a href="/" className="logout">
+                <a href="/logout" className="logout">
                     <i className="fa-solid fa-right-from-bracket"></i> &nbsp; &nbsp; Log-out</a
                 >
                 </div>

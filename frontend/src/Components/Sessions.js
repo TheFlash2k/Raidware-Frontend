@@ -2,22 +2,20 @@ import { useState, useEffect } from "react";
 import rd01 from './resources/rd-01 1.png';
 import rd02 from './resources/rd-01 inverted 1.png';
 import axios from "axios";
-import './Sessions.css';
+import './styles/Sessions.css';
+import Terminal, { ColorMode, TerminalOutput } from 'react-terminal-ui';
 
 export default function Sessions() {
 
     const [sessions, setSessions] = useState([]);
-    const [cmd, setCmd] = useState([]);
-    const [response, setResponse] = useState([]);
-    const [checkResponse, setCheckResponse] = useState(false);
+    const [terminalLineData, setTerminalLineData] = useState([]);
 
     useEffect(() => {
-        const url = "http://localhost:5000/v1/sessions";
+        const url = localStorage.getItem('url') + "/sessions";
 
         axios.get(url, {
             headers: {
-                // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         }).then((response) => {
             setSessions(response.data.sessions);
@@ -26,7 +24,6 @@ export default function Sessions() {
             console.log(error);
         });
     }, []);
-
 
     const handleDark = () => {
         const div1 = document.getElementById("div1");
@@ -84,29 +81,37 @@ export default function Sessions() {
             body.classList.toggle("dark-mode");
         }
 
-        const handleTerminal = () => {
-            const stretch = document.getElementById("dummy1");
-            const terminal = document.getElementById("terminal1");
-            const closeTerminal = document.getElementById("closeTerminal1");
+        const handleTerminal = (uid) => {
+            const dummy = "dummy" + uid;
+            const close = "closeTerminal" + uid;
+            const stretch = document.getElementById(dummy);
+            const terminal = document.getElementById(uid);
+
+            const closeTerminal = document.getElementById(close);
             terminal.style.display = 'none';
             stretch.style.height = '350px';
             closeTerminal.style.display = 'block';
         }
 
-        const handleCloseTerminal = () => {
-            const stretch = document.getElementById("dummy1");
-            const terminal = document.getElementById("terminal1");
-            const closeTerminal = document.getElementById("closeTerminal1");
+        const handleCloseTerminal = (uid) => {
+            const dummy = "dummy" + uid;
+            const close = "closeTerminal" + uid;
+            const stretch = document.getElementById(dummy);
+            const terminal = document.getElementById(uid);
+            const closeTerminal = document.getElementById(close);
             terminal.style.display = 'block';
             stretch.style.height = '50px';
             closeTerminal.style.display = 'none';
         }
 
-        const handlecmd = (e, uid) => {
-          e.preventDefault();
-          document.querySelector('.cmd-div').style.display = 'block';
+        const handleMultipleTerminal = (uid, msg) => {
+            const terminal = document.getElementById("cmd_" + uid);
+            terminal.textContent += msg + "\n";
+          }
+
+        const handlecmd = (uid, cmd) => {         
           
-          const url = "http://localhost:5000/v1/interact";
+          const url = localStorage.getItem('url') + "/interact"; ;
 
             const data = {
               'SID': uid,
@@ -116,15 +121,13 @@ export default function Sessions() {
 
           axios.post(url, data, {
             headers: {
-                // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         }).then((response) => {
             console.log(response.data);
-            response.data.cmd = cmd;
-            setResponse(response.data);
-            setCheckResponse(true);
-            document.querySelector('.response-div').style.display = 'block';
+            handleMultipleTerminal(uid, response.data.msg);
+            // setTerminalLineData([...terminalLineData, <TerminalOutput>{response.data.msg}</TerminalOutput>]);
+
         }).catch((error) => {
             console.log(error);
         });
@@ -160,14 +163,14 @@ export default function Sessions() {
               <span class="arrow-icon"></span>
             </button>
             <div class="a-tags">
-              <a href="/">
+              <a href="/listeners">
                 <i class="fa-solid fa-headphones"></i> &nbsp; &nbsp;
                 Listeners</a
               >
               <a href="/sessions">
                 <i class="fa-solid fa-briefcase"></i> &nbsp; &nbsp; Session</a
               >
-              <a href="/">
+              <a href="/agents">
                 <i class="fa-solid fa-users"></i> &nbsp; &nbsp; Agents</a
               >
               <a href="/loot">
@@ -176,9 +179,12 @@ export default function Sessions() {
               <a href="/users">
                 <i class="fa-solid fa-user"></i> &nbsp; &nbsp; Users</a
               >
-              <a href="/">
+              <a href="/settings">
                 <i class="fa-solid fa-gear"></i> &nbsp; &nbsp; Settings</a
               >
+              <a href="/logout" className="logout">
+                    <i className="fa-solid fa-right-from-bracket"></i> &nbsp; &nbsp; Log-out</a
+                >
             </div>
           </div>
           <div class="content" id="content">
@@ -210,6 +216,9 @@ export default function Sessions() {
               <div class="pwd agent-menu-child">
                 PWD &nbsp;<i class="fa-solid fa-up-down"></i>
               </div>
+              <div class="pwd agent-menu-child">
+                IP &nbsp;<i class="fa-solid fa-up-down"></i>
+              </div>
               <div class="operations agent-menu-child">
                 Operations
               </div>
@@ -217,13 +226,13 @@ export default function Sessions() {
             <div class="agent-items">
               <div class="agent-items-scroll">
                 { sessions.map((session) => (
-                <div class="dummy dummy1" id="dummy1" key={session.UID}>
+                <div class="dummy dummy1" id={`dummy` + session.UID} key={session.UID}>
                   <div class="dummy-stretch1 dummy-stretch">
                   <div class="dummy-child dummy-child1">{session.UID}</div>
                   <div class="dummy-child dummy-child1">{session.Protocol}</div>
                   <div class="dummy-child dummy-child1">{session.proc}</div>
                   <div class="dummy-child dummy-child1">{session.pid}</div>
-                  { session.OS.includes('Windows') ? (
+                  { session.OS.toLowerCase().includes('windows') || session.OS.toLowerCase().includes('microsoft') ? (
                   <div class="dummy-child dummy-child1 os-icons">
                     <i class="fa-brands fa-windows fa-2x"></i>
                   </div>
@@ -231,7 +240,7 @@ export default function Sessions() {
                      null
                     )}
 
-                    { session.OS.includes('Mac') ? (
+                    { session.OS.toLowerCase().includes('mac') ? (
                     <div class="dummy-child dummy-child1 os-icons">
                         <i class="fa-brands fa-apple fa-2x"></i>
                     </div>
@@ -239,7 +248,7 @@ export default function Sessions() {
                         null
                     )}
 
-                    { session.OS.includes('Linux') ? (
+                    { session.OS.toLowerCase().includes('linux') ? (
                     <div class="dummy-child dummy-child1 os-icons">
                         <i class="fa-brands fa-linux fa-2x"></i>
                     </div>
@@ -250,10 +259,11 @@ export default function Sessions() {
                   <div class="dummy-child dummy-child1">{session.Listener_Name}</div>
                   <div class="dummy-child dummy-child1">{session.user}</div>
                   <div class="dummy-child dummy-child1">{session.pwd}</div>
+                  <div class="dummy-child dummy-child1">{session.ip}</div>
                   <div class="dummy-child dummy-child1 icons-dummy i-d">
                     <div class="terminal-dummy dummy-icon">
-                      <i onClick={handleTerminal}  class="fa-solid fa-terminal" id="terminal1"></i>
-                      <i onClick={handleCloseTerminal} class="fa-solid fa-circle-xmark fa-2x"  id="closeTerminal1"></i>
+                      <i onClick={e => handleTerminal(session.UID)}  class="fa-solid fa-terminal" id={session.UID}></i>
+                      <i onClick={e => handleCloseTerminal(session.UID)} class="fa-solid fa-circle-xmark fa-2x"  id={"closeTerminal" + session.UID}></i>
                     </div>
                     <div class="download-dummy dummy-icon">
                       <i class="fa-solid fa-download"></i>
@@ -269,30 +279,14 @@ export default function Sessions() {
                     </div>
                   </div>
                 </div>
-                <div class="cmd" id="cmd">
-                  <div class="cmd-scroll">
-                    { 
-                      (
-                      <div>
-                      <form onSubmit={e => handlecmd(e, session.UID)}><span>&gt;&gt;&nbsp; </span><input onChange={e => setCmd(e.target.value)} className="cmd-input" /></form>  
-                        <div className="cmd-div">
-                          <span>[+]</span> Tasked Agent <span id="base">{session.UID}</span> to run: {cmd}
+                <div className="cmd">
+                      <Terminal  style= {{height: '20rem'}} colorMode={ ColorMode.Dark }  onInput={ TerminalInput => handlecmd(session.UID, TerminalInput) }>
+                        <TerminalOutput>
+                        <div id={"cmd_" + session.UID}>
                         </div>
-                        <div className="response-div">
-                        <span>[+]</span> Command output received:
-                        <br />
-                          { checkResponse && response.msg.split('\n').map((item, i) => (
-                            <div key={i}>
-                              {item}
-                            </div>
-                          ))}
-                        <br /><br />
-                        </div>
-                      </div>
-                      )
-                    }
+                      </TerminalOutput>
+                      </Terminal>
                     </div>
-                </div>
                 </div>
                 ))}
                 </div>

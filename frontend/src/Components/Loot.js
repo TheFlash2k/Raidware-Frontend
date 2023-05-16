@@ -4,19 +4,19 @@ import rd02 from './resources/rd-01 inverted 1.png';
 import rd03 from './resources/rd-01.png';
 import rd04 from './resources/rd-01 inverted.png';
 import axios from "axios";
-import './Loot.css';
+import './styles/Loot.css';
 
 export default function Loot() {
 
     const [loots, setLoots] = useState([]);
 
     useEffect(() => {
-        const url = "http://localhost:5000/v1/loot";
+
+        const url = localStorage.getItem('url') + "/loot";
 
         axios.get(url, {
             headers: {
-                // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MzczNzg2MywianRpIjoiYjg5YWRjYjMtYmQzYi00ZWY3LTg2ZmUtYjQyN2FmNWVlMjExIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJhaWR3YXJlIiwibmJmIjoxNjgzNzM3ODYzLCJjc3JmIjoiMjQyMDkxNmYtOWE3OC00Y2E4LTkxNDItZDdmMzEwOTIzNjFmIiwiZXhwIjoxNjgzODI0MjYzfQ.hggQkfYuG5BQN18kd8BSv1yfKjJbcPikbMs0DOJOASs'
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         }).then((response) => {
             setLoots(response.data.loot);
@@ -144,14 +144,14 @@ export default function Loot() {
                 <span class="arrow-icon"></span>
               </button>
               <div class="a-tags">
-                <a href="/">
+                <a href="/listeners">
                   <i class="fa-solid fa-headphones"></i> &nbsp; &nbsp;
                   Listeners</a
                 >
-                <a href="/">
+                <a href="/sessions">
                   <i class="fa-solid fa-briefcase"></i> &nbsp; &nbsp; Session</a
                 >
-                <a href="/">
+                <a href="/agents">
                   <i class="fa-solid fa-users"></i> &nbsp; &nbsp; Agents</a
                 >
                 <a href="/loot">
@@ -160,8 +160,11 @@ export default function Loot() {
                 <a href="/users">
                   <i class="fa-solid fa-user"></i> &nbsp; &nbsp; Users</a
                 >
-                <a href="/">
+                <a href="/settings">
                   <i class="fa-solid fa-gear"></i> &nbsp; &nbsp; Settings</a
+                >
+                <a href="/logout" className="logout">
+                    <i className="fa-solid fa-right-from-bracket"></i> &nbsp; &nbsp; Log-out</a
                 >
               </div>
             </div>
