@@ -2,9 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
   }
   body {
-    font-family: "Poppins", sans-serif;
     position: relative;
   }
   .logo-light{
@@ -38,7 +38,7 @@
     object-fit: cover;
   }
   /* Light Mode */
-  .Agents {
+  .dashboards {
     position: relative;
     width: 100%;
     height: 100vh;
@@ -48,6 +48,7 @@
     height: 100%;
   }
   .navbar {
+    position: relative;
     width: 50px;
     background-color: whitesmoke;
     color: #333;
@@ -103,7 +104,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
-    transition: 0.3s ease-in-out;
   }
   .navbar a:hover i {
     color: dodgerblue;
@@ -134,7 +134,6 @@
     transform: rotate(45deg);
     transition: transform 0.3s;
     margin-right: 6px;
-    transition: 0.3s ease-in-out;
   }
   .stretched .arrow-icon {
     transform: rotate(-135deg);
@@ -148,13 +147,15 @@
     flex-wrap: nowrap;
     overflow: hidden;
   }
-  .agent {
+  .dash {
     width: 100%;
-    height: 70px;
+    height: 10vh;
     background-color: #fff;
     align-self: flex-start;
     justify-self: start;
     transition: 0.3s ease-in-out;
+    border-bottom: 1px black solid;
+    position: relative;
   }
   .heading {
     position: absolute;
@@ -166,278 +167,130 @@
     left: 10px;
     transition: 0.3s ease-in-out;
   }
-  .agent-menu {
-    border-bottom: #333 0.1px solid;
+  .dashboard{
+    height: 90vh;
     width: 100%;
-    height: 50px;
+    background-color: #fff;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    padding-right: 40px;
+    flex-direction: column;
+    justify-content: space-around;
     transition: 0.3s ease-in-out;
   }
-  .agent-menu-child {
-    width: 90px;
-    text-align: start;
-    color: #333;
-    font-size: 12px;
+  .analatics{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0 0 0;
+  }
+  .card{
+    height: 150px;
+    width: 300px;
+    position: relative;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    background: #faf9f9;
     transition: 0.3s ease-in-out;
   }
-  .agent-menu-child:hover i {
-    color: dodgerblue;
-  }
-  .agent-menu-child:hover {
-    cursor: pointer;
-  }
-  .operations{
-    width: 130px;
-    font-size: 10px;
+  .card h4{
+    font-size: 1.5rem;
     font-weight: 600;
   }
-  .agent-items {
-    align-self: flex-end;
-    justify-self: flex-end;
-    width: 100%;
-    height: 100vh;
-    background-color: #fff;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    transition: 0.3s ease-in-out;
+  .card hr{
+    width: 90%;
+    position: absolute;
+    bottom: 35px;
+    left: 5%;
   }
-  .agent-items-scroll {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    overflow: hidden;
+  .card .card-status{
+    position: absolute;
+    bottom: 5px;
+    left: 5%;
   }
-  .agent-items::-webkit-scrollbar {
-    display: none;
-  }
-  .agent-items-scroll .dummy {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: start;
-    transition: 0.3s ease-in-out;
-    overflow: hidden;
-  }
-  .agent-items-scroll .dummy1{
-    height: 50px;
-  }
-  .agent-items-scroll .dummy2{
-    height: 50px;
-  }
-  .cmd{
-
-    display: none;
-    /* display: block; */
-    height: 350px;
-    width: 100%;
-    background-color: black;
-    text-align: justify;
-    font-size: 13px;
-    color: white;
-    padding: 10px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    margin-top: 8px;
-  }
-
-  .cmd-input{
-    background-color: transparent;
-    border: none;
-    outline: none;
-    color: white;
-  }
- .response-div{
-    display: none;
-  }
-  .cmd-div{
-    display: none;
-  }
-
-  .cmd-scroll{
-    overflow: hidden;
-    max-width: 86vw;
-    display: flex;
-    text-align: justify;
-    display: inline-block;
-  }
-  .cmd::-webkit-scrollbar {
-    display: none;
-  }
-  .cmd-scroll span{
-    display: inline-block;
+  .card .user-status span{
     color: green;
   }
-  .cmd-scroll #base{
-    color: red;
-  }
-  .dummy-stretch {
-    width: 100%;
+  .card .icon{
+    position: absolute;
     height: 50px;
+    width: 50px;
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -25px;
+    left: 10px;
+    font-size: 1.3rem;
+    border-radius: 8px;
+  }
+  .enabled-listner-icon{
+    background: lightblue;
+    box-shadow: 0 0 10px lightblue;
+  }
+  .session-icon{
+    background: lightgreen;
+    box-shadow: 0 0 10px lightgreen;
+  }
+  .total-user-icon{
+    background: lightcoral;
+    box-shadow: 0 0 10px lightcoral;
+  }
+  .map{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: -8px;
+    padding: 10px 55px;
   }
-  .dummy:hover {
-    background-color: lightgreen !important;
-  }
-  .dummy-child {
-    display: inline-block;
-    padding-top: 5px;
-    /* width: 100px !important; */
-    height: 30px;
-    text-align: start;
-    color: #333;
+  .total-user-map{
+    border-radius: 8px;
     overflow: hidden;
-    font-size: 13px;
+    height: 300px;
+  }
+  .pie-chart{
+    background:
+        radial-gradient(circle closest-side,#fff 0,#fff 43.68%,transparent 43.68%,transparent 84%,#fff 0),
+        conic-gradient(from 42deg,#4e79a7 0,#4e79a7 49.4%,#f28e2c 0,#f28e2c 79.3%,#e15759 0,#e15759 100%);
+    position:relative;
+    width:600px;
+    min-height:300px;
+    margin:0;
     transition: 0.3s ease-in-out;
   }
-  .dummy-child:hover {
-    cursor: pointer;
+  .pie-chart cite{
+    position:absolute;
+    bottom:0;
+    font-size:80%;
+    padding:1rem;
+    color:gray;
   }
-  .os-icons{
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    padding-left: 10px;
-    margin-top: -8px;
+  .pie-chart figcaption{
+    position:absolute;
+    bottom:1em;
+    right:1em;
+    font-size:smaller;
+    text-align:right;
   }
-  .os-icons .fa-linux{
-    display: block;
+  .pie-chart span:after{
+    display:inline-block;
+    content:"";
+    width:.8em;
+    height:.8em;
+    margin-left:.4em;
+    height:.8em;
+    border-radius:.2em;
+    background:currentColor;
   }
-  .os-icons .fa-windows{
-    display: block;
+  .window{
+    color: #4E79A7;
   }
-  .os-icons .fa-apple{
-    display: block;
+  .mac{
+    color: #f28e2c;
   }
-  .icons-dummy {
-    width: 150px;
-    padding-top: 0;
-    padding-left: 0;
-  }
-  .icons-dummy:hover {
-    cursor: default;
-  }
-  .dummy-icon {
-    display: inline-block;
-    position: relative;
-    height: 25px;
-    width: 25px;
-    border-radius: 25px;
-    background-color: transparent;
-    cursor: pointer;
-    margin: 0;
-  }
-  .fa-trash {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #ffcccb;
-    font-size: 1rem;
-  }
-  .delete-dummy:hover .fa-trash {
-    color: red;
-  }
-  .fa-bars{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: grey;
-    font-size: 1rem;
-  }
-  .bars-dummy:hover .fa-bars {
-    color: black;
-  }
-  .fa-terminal{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: grey;
-    font-size: 1rem;
-  }
-  .i-d .fa-terminal{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: grey;
-    font-size: 1rem;
-  }
-  .terminal-dummy:hover .fa-terminal {
-    color: black;
-  }
-  .i-d .fa-circle-xmark{
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: grey;
-    font-size: 1rem;
-  }
-  .i-d2 .fa-terminal{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: grey;
-    font-size: 1rem;
-  }
-  .terminal-dummy:hover .fa-terminal {
-    color: black;
-  }
-  .i-d2 .fa-circle-xmark{
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: grey;
-    font-size: 1rem;
-  }
-  .terminal-dummy:hover .fa-circle-xmark {
-    color: black;
-  }
-  .fa-download{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: grey;
-    font-size: 1rem;
-  }
-  .download-dummy:hover .fa-download {
-    color: black;
-  }
-  .fa-upload{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: grey;
-    font-size: 1rem;
-  }
-  .upload-dummy:hover .fa-upload {
-    color: black;
+  .linux{
+    color: #e15759;
   }
   /* Dark Mode */
-  .dark-mode {
-    background-color: #23242a;
-    color: #fff;
-    transition: 0.3s ease-in-out;
-  }
   .dark-mode .stretch-button{
     background-color: #333;
     color: whitesmoke;
@@ -452,33 +305,41 @@
     color: inherit;
     transition: 0.3s ease-in-out;
   }
-  .dark-mode .agent {
+  .dark-mode .dash {
     background-color: #23242a;
     color: #fff;
     transition: 0.3s ease-in-out;
+    border-bottom: 1px whitesmoke solid;
   }
-  .dark-mode .agent-menu{
+  .dark-mode .dashboard{
     background-color: #23242a;
     transition: 0.3s ease-in-out;
   }
-  .dark-mode .agent-menu-child{
-    color: #fff;
+  .dark-mode .pie-chart{
+    background:
+    radial-gradient(circle closest-side,#23242a 0,#23242a 43.68%,transparent 43.68%,transparent 84%,#23242a 0),
+    conic-gradient(from 42deg,#4e79a7 0,#4e79a7 49.4%,#f28e2c 0,#f28e2c 79.3%,#e15759 0,#e15759 100%);
+    transition: 0.3s ease-in-out;
+    
+  }
+  .dark-mode .card{
+    background-color: #2e3038;
     transition: 0.3s ease-in-out;
   }
-  .dark-mode .agent-items{
-    background-color: #23242a;
+  .dark-mode .card p{
+    color: white;
     transition: 0.3s ease-in-out;
   }
-  .dark-mode .dummy-child{
-    color: #fff;
+  .dark-mode .card h4{
+    color: white;
     transition: 0.3s ease-in-out;
   }
-  .dark-mode .cmd{
-    background-color: #1e1f28;
-    color: #845895;
+  .dark-mode .card hr{
+    color: white;
+    transition: 0.3s ease-in-out;
   }
-  .dark-mode .dummy:hover {
-    background-color: lightcoral !important;
+  .dark-mode .pie-chart figcaption{
+    color: white;
   }
   /* Theme Mode */
   .visible {
@@ -496,13 +357,6 @@
   .hide{
     display: none;
     transition: 0.3s ease-in-out;
-  }
-  /* CMD */
-  .stretchback{
-    display: block;
-  }
-  .heightstretch{
-    height:350px;
   }
   /* Toggle */
   .toggle-container {

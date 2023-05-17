@@ -190,7 +190,7 @@ export default function Users() {
                   <div className="last-logon user-menu-child lmlc3">
                     Last Logon &nbsp;<i className="fa-solid fa-up-down"></i>
                   </div>
-                  <div className="operations user-menu-child">Operations</div>
+                  {/* <div className="operations user-menu-child">Operations</div> */}
                 </div>
                 <div className="user-items">
                   <div className="user-items-scroll">
@@ -198,25 +198,9 @@ export default function Users() {
                     <div className="dummy" key={user.id}>
                       <div className="dummy-child dlc1">{user.id}</div>
                       <div className="dummy-child dlc2">{user.username}</div>
-                      <div className="dummy-child dlc2">{user.email}</div>
+                      <div className="dummy-child dlc2 email-div">{user.email}</div>
                       <div className="dummy-child dlc2">Administrator</div>
                       <div className="dummy-child dlc3">Online</div>
-                      <div className="dummy-child icons-dummy">
-                        <div className="disable-container">
-                          <input
-                            type="checkbox"
-                            className="disable-checkbox"
-                            id="disable"
-                          />
-                          <label for="disable" className="disable-label">
-                            <span className="disable-inner"></span>
-                            <span className="disable-switch"></span>
-                          </label>
-                        </div>
-                        <div className="edit-dummy dummy-icon">
-                          <i className="fa-solid fa-pen-to-square fa-lg"></i>
-                        </div>
-                      </div>
                     </div>
                     ))}
                   </div>

@@ -2,20 +2,74 @@ import rd03 from './resources/rd-01.png';
 import rd04 from './resources/rd-01 inverted.png';
 import './styles/Login.css'
 import axios from "axios";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { showPopup, hidePopup } from "./Popup";
+import './styles/Popup.css'
+
+
+
 
 export default function Login() {
-
+    
+    const [errorMessage, setErrorMessage] = useState("");
     useEffect(() => {
-        const url = localStorage.getItem("url");
-        const token = localStorage.getItem("token");
+        // Get the logo field and set its position to relative:
+        const logo = document.getElementById("logo");
+        if(logo !== null) {
+            logo.style.position = "relative";
+        }
+        hidePopup();
+        let url = localStorage.getItem("url");
+        let token = localStorage.getItem("token");
+
+        // Validate url:
+        if(url !== null) {
+            axios.get(url + "/version").then((response) => {
+                if(response.status === 200) {
+                    console.log("Server is up");
+                }
+            }).catch((error) => {
+                url = null;
+                localStorage.removeItem("url");
+            });
+        }
+
+        // Validate token:
+        if(token !== null && url !== null) {
+            const data = {
+                token: token
+            }
+            axios.get(url + "/sessions", data).then((response) => {
+                try {
+                    if(response.status === 200) {
+                        console.log("Token is valid");
+                    }
+                    else {
+                        console.log("Token is invalid");
+                        localStorage.removeItem("token");
+                        token = null;
+                    }
+                }
+                catch(err) {
+                    console.log("Token is invalid");
+                    localStorage.removeItem("token");
+                    token = null;
+                }
+            }).catch((error) => {
+                console.log("Error: " + error);
+            });
+        }
+
+        console.log("URL: " + url);
+        console.log("Token: " + token);
         if(url !== null && token !== null) {
-            window.location.href = "/listeners";    
+            // window.location.href = "/listeners";    
+            console.log("Redirecting to listeners");
         }
     }, []);
 
     const handleDark = () => {
-
+        hidePopup();
         const div1 = document.getElementById("div1");
         const div2 = document.getElementById("div2");
         if (div1.classList.contains("visible")) {
@@ -30,13 +84,14 @@ export default function Login() {
             div2.classList.add("hidden");
           }
     }
-
     const handleChangeDark = () => {
+        hidePopup();
         const body = document.body;
         body.classList.toggle("dark-mode");
     }
 
     const handleLogin = (e) => {
+        hidePopup();
         e.preventDefault();
         // Get the form fields:
         const username = document.getElementById("login-user").value;
@@ -54,7 +109,9 @@ export default function Login() {
                 localStorage.setItem("url", api_url);
             }
         }).catch((error) => {
-            console.log("Error: " + error);
+            setErrorMessage("Unable to communicate with the teamserver.\nPlese check the URL and try again.");
+            showPopup();
+            return;
         });
 
         const data = {
@@ -66,7 +123,7 @@ export default function Login() {
         axios.post(api_url + "/login", data).then((response) => {
             if(response.status === 200) {
                 localStorage.setItem("token", response.data.access_token);
-                window.location.href = "/listeners";
+                window.location.href = "/";
             }
             else {
                 console.log("Login failed");
@@ -74,7 +131,8 @@ export default function Login() {
             }
         }
         ).catch((error) => {
-            console.log("Error: " + error);
+            setErrorMessage(error.response.data.message);
+            showPopup();
             return;
         }
         );
@@ -89,64 +147,29 @@ export default function Login() {
                 <span class="toggle-inner"><i class="fa-solid fa-sun"></i></span>
                 <span class="toggle-switch"><i class="fa-solid fa-moon"></i></span>
             </label>
-            </div>
+        </div>
             <div class="mainLogin">
             <form class="login-section">
+                <div class="error-popup" id="err-popup">
+                    <p>Error:&nbsp;</p>
+                    <button onClick={hidePopup}>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <div>{errorMessage}</div>
+                </div>
                 <div class="logo-sec" id="login-logo-sec">
                 <img src={rd03} alt="logo" class="logo visible" id="div1" />
-                <img
-                    src={rd04}
-                    alt="logo"
-                    class="logo hidden"
-                    id="div2"
-                />
+                <img src={rd04} alt="logo" class="logo hidden" id="div2" />
                 </div>
                 <div class="url-sec">
-                <input
-                    class="input-url-disabled"
-                    type="url"
-                    name=""
-                    id="login-url-dis"
-                    placeholder="https://"
-                    required="required"
-                    disabled="disabled"
-                />
-                <input
-                    class="input-url"
-                    type="text"
-                    name=""
-                    id="login-url"
-                    placeholder="Teamserver URL"
-                    required="required"
-                />
+                <input class="input-url-disabled" type="url" name="" id="login-url-dis" placeholder="https://" required="required" disabled="disabled" />
+                <input class="input-url" type="text" name="" id="login-url" placeholder="Teamserver URL" required="required" />
                 </div>
-                <input
-                class="input"
-                type="text"
-                id="login-user"
-                placeholder="Username"
-                required="required"
-                />
-                <input
-                class="input"
-                type="password"
-                name=""
-                id="login-password"
-                placeholder="Password"
-                required="required"
-                />
-                <input
-                class="input"
-                type="password"
-                name="team-password"
-                id="login-team"
-                placeholder="Team Password"
-                required="required"
-                />
+                <input class="input" type="text" id="login-user" placeholder="Username" required="required" />
+                <input class="input" type="password" name="" id="login-password" placeholder="Password" required="required" />
+                <input class="input" type="password" name="team-password" id="login-team" placeholder="Team Password" required="required" />
                 <label for="check-light">
-                <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Not yet registered? <a href="/register">Register</a>
-                </p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Not yet registered? <a href="/register">Register</a></p>
                 </label>
                 <input onClick={handleLogin} type="submit" value="Login" class="button" id="login-submit" />
             </form>
