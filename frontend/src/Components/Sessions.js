@@ -277,7 +277,7 @@ export default function Sessions() {
 									<div class="dummy-child dummy-child1">{session.pid}</div>
 									{ session.OS.toLowerCase().includes('windows') || session.OS.toLowerCase().includes('microsoft') ? (<div class="dummy-child dummy-child1 os-icons"><i class="fa-brands fa-windows fa-2x"></i></div>) : (null)}
 									{ session.OS.toLowerCase().includes('mac') ? (<div class="dummy-child dummy-child1 os-icons"><i class="fa-brands fa-apple fa-2x"></i></div>) : (null)}
-									{ session.OS.toLowerCase().includes('linux') ? (<div class="dummy-child dummy-child1 os-icons"><i class="fa-brands fa-linux fa-2x"></i></div>) : (null)}
+									{ session.OS.toLowerCase().includes('linux') || session.OS.toLowerCase().includes('ubuntu') ? (<div class="dummy-child dummy-child1 os-icons"><i class="fa-brands fa-linux fa-2x"></i></div>) : (null)}
 
 									<div class="dummy-child dummy-child1">{session.Listener_Name}</div>
 									<div class="dummy-child dummy-child1">{session.user}</div>

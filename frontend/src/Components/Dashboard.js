@@ -5,8 +5,7 @@ import rd03 from './resources/rd-01.png';
 import dark_logo from './resources/rd-01 inverted.png';
 import './styles/Dashboard.css'
 import axios from "axios";
-import validateToken from "./utils/utils.js";
-import validateUrl from "./utils/utils.js";
+import { Chart } from "react-google-charts";
 import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from 'react-simple-maps';
 const worldGeoURL = 'https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json';
 
@@ -15,8 +14,35 @@ export default function Dashboard() {
   const [user, setUser] = useState(0);
   const [sessions, setSessions] = useState(0);
   const [listeners, setListeners] = useState(0);
+  const [backgroundColor, setBackgroundColor] = useState('white');
+  const [fontColor, setFontColor] = useState('black');
+  const [darkMode, setDarkMode] = useState(false);
+
+  const changeBackgroundColor = (color) => {
+    setBackgroundColor(color); // Change the background color to yellow
+  };
+
+  const options = {
+    title: "Sessions OS",
+    pieHole: 0.3,
+    is3D: false,
+    pieStartAngle: 100,
+    pieSliceTextStyle: {
+      color: fontColor,
+    },
+    legend: {
+      textStyle : {
+        color: fontColor
+      }
+    },
+    backgroundColor: backgroundColor,
+    titleTextStyle: { 
+      color: fontColor
+    }
+  };
 
   const handleDark = () => {
+
     const div1 = document.getElementById("div1");
     const div2 = document.getElementById("div2");
     const div3 = document.getElementById("div3");
@@ -49,7 +75,18 @@ export default function Dashboard() {
     }
 
     const handleChangeDark = () => {
+
+      
       const body = document.body;
+      
+      if (body.classList.contains("dark-mode")) {
+        setFontColor('black');
+        setBackgroundColor('white');
+      }
+      else {
+        setFontColor('white');
+        setBackgroundColor('#23242a');
+      }
       body.classList.toggle("dark-mode");
   }
 
@@ -74,7 +111,6 @@ export default function Dashboard() {
     else {
       url += __endpoint;
     }
-    console.log("Making request to: ", url);
     const token = localStorage.getItem('token');
     axios.get(url, {
       headers: {
@@ -82,7 +118,6 @@ export default function Dashboard() {
         'Authorization': `Bearer ${token}`
       }
     }).then((response) => {
-        console.log(response)
         setterFunc(response.data[_obj].length);
     }
     ).catch((error) => {console.log("Error", error);});
@@ -92,11 +127,55 @@ export default function Dashboard() {
   const getSessions = () => { GET('sessions', setSessions) }
   const getListeners = () => { GET('listeners', setListeners, 'enabled') }
 
+  const [osData, setOsData] = useState([
+    ['OS', 'Sessions'],
+    ['Windows', 0],
+    ['MacOS', 0],
+    ['Linux', 0]
+  ]);
+
+  const getOS = () => {
+    var url = localStorage.getItem('url') + "/sessions";
+    const token = localStorage.getItem('token');
+    axios.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }).then((response) => {
+        var windows = 0;
+        var macos = 0;
+        var linux = 0;
+        const sessions = response.data.sessions;
+        sessions.forEach((session) => {
+          if(session.OS.toLowerCase().includes('windows')) {
+            console.log("==> Windows");
+            windows += 1;
+          }
+          else if(session.OS.toLowerCase().includes('macos')) macos += 1;
+          else linux += 1;
+        });
+        const _osData = [
+          ['OS', 'Sessions'],
+          ['Windows', windows],
+          ['MacOS', macos],
+          ['Linux', linux]
+        ]
+        console.log(_osData);
+        setOsData(_osData);
+    }).catch((error) => {console.log("Error", error);});
+  }
 
   useEffect(() => {
+
+    if(localStorage.getItem('token') === null || localStorage.getItem('url') === null) {
+      window.location.replace("/login");
+    }
+
     getUsers();
     getSessions();
     getListeners();
+    getOS();
   }, []);
 
   
@@ -175,7 +254,15 @@ export default function Dashboard() {
                 <div class="total-user-map">
                   {/* <img src= alt=""> */}
                 </div>
-                
+                <div class="pie-chart">
+                <Chart
+                    chartType="PieChart"
+                    width="100%"
+                    height="500px"
+                    data={osData}
+                    options={options}
+                  />
+                </div>
                 {/* <figure class="pie-chart">
                   <figcaption>
                       Windows<span class="window"></span>
