@@ -3,12 +3,11 @@ import rd01 from './resources/rd-01 1.png';
 import rd02 from './resources/rd-01 inverted 1.png';
 import axios from "axios";
 import './styles/Sessions.css';
-import Terminal, { ColorMode, TerminalOutput } from 'react-terminal-ui';
+import Terminal, { TerminalOutput } from 'react-terminal-ui';
 
 export default function Sessions() {
 
 		const [sessions, setSessions] = useState([]);
-		const [terminalLineData, setTerminalLineData] = useState([]);
 
 		const setup_terminal = () => {
 			const _rtl = document.getElementsByClassName('react-terminal-line');
@@ -241,14 +240,15 @@ export default function Sessions() {
 							<span class="arrow-icon"></span>
 						</button>
 						<div class="a-tags">
-							<a href="/listeners"><i class="fa-solid fa-headphones"></i> &nbsp; &nbsp;Listeners</a>
+              <a href="/"><i class="fa-solid fa-chart-line"></i>&nbsp; &nbsp;Dashboard</a>
+              <a href="/listeners"><i class="fa-solid fa-headphones"></i> &nbsp; &nbsp;Listeners</a>
 							<a href="/sessions"><i class="fa-solid fa-briefcase"></i> &nbsp; &nbsp; Session</a>
 							<a href="/agents"><i class="fa-solid fa-users"></i> &nbsp; &nbsp; Agents</a>
 							<a href="/loot"><i class="fa-solid fa-coins"></i> &nbsp; &nbsp; Loot</a>
 							<a href="/users"><i class="fa-solid fa-user"></i> &nbsp; &nbsp; Users</a>
 							<a href="/settings"><i class="fa-solid fa-gear"></i> &nbsp; &nbsp; Settings</a>
 							<a href="/logout" className="logout"><i className="fa-solid fa-right-from-bracket"></i> &nbsp; &nbsp; Log-out</a>
-						</div>
+          </div>
 					</div>
 					<div class="content" id="content">
 						<div class="agent">
@@ -307,7 +307,7 @@ export default function Sessions() {
 											<Terminal 
 												startState="maximised"
 												hideTopBar={true}
-												height="140px"
+												height="250px"
 												onInput={ TerminalInput => handlecmd(session.UID, TerminalInput) }
 											>
 												<TerminalOutput>

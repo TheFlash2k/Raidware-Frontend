@@ -296,7 +296,8 @@
     height: 30px;
     text-align: start;
     color: #333;
-    overflow: hidden;
+    /* overflow: !important; */
+    overflow: visible;
     font-size: 13px;
     transition: 0.3s ease-in-out;
   }
