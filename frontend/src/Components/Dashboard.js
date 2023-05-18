@@ -18,8 +18,14 @@ export default function Dashboard() {
   const [fontColor, setFontColor] = useState('black');
   const [darkMode, setDarkMode] = useState(false);
   const [coordinates, setCoordinates] = useState([{"name" : "", "coordinates" : [0, 0]}]);
-  const [center, setCenter] = useState([0, 0]);
-  const [zoom, setZoom] = useState(0);
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const togglePopup = (location) => {
+    setShowPopup(!showPopup);
+    setSelectedLocation(location);
+  };
 
   const changeBackgroundColor = (color) => {
     setBackgroundColor(color); // Change the background color to yellow
@@ -196,33 +202,15 @@ export default function Dashboard() {
     }).catch((error) => {console.log("Error", error);});
   }
 
+  const handleMarkerClick = (location) => {
+    console.log("Marker clicked: ");
+  }
+
   useEffect(() => {
 
     if(localStorage.getItem('token') === null || localStorage.getItem('url') === null) {
       window.location.replace("/login");
     }
-
-    // if (coordinates.length > 0) {
-    //   const _coordinates = coordinates.map((location) => location.coordinates);
-    //   const minX = Math.min(..._coordinates.map(([longitude]) => longitude));
-    //   const maxX = Math.max(..._coordinates.map(([longitude]) => longitude));
-    //   const minY = Math.min(..._coordinates.map(([, latitude]) => latitude));
-    //   const maxY = Math.max(..._coordinates.map(([, latitude]) => latitude));
-
-    //   const centerX = (minX + maxX) / 2;
-    //   const centerY = (minY + maxY) / 2;
-
-    //   const deltaX = maxX - minX;
-    //   const deltaY = maxY - minY;
-
-    //   const zoomX = 360 / deltaX;
-    //   const zoomY = 180 / deltaY;
-
-    //   const zoom = Math.min(zoomX, zoomY);
-
-    //   setCenter([centerX, centerY]);
-    //   setZoom(zoom);
-    // }
 
     getUsers();
     getSessions();
@@ -307,32 +295,39 @@ export default function Dashboard() {
               <div class="map">
                 <div class="total-user-map">
                 <div style={{ width: '100%', height: '800px', backgroundColor: backgroundColor }}>
-                    <ComposableMap
-                      projection="geoMercator"
-                      style={{ width: '100%', height: '100%' }}
-                    >
-                      <ZoomableGroup zoom={1} center={[0, 0]}>
-                        <Geographies geography={worldGeoURL}>
-                          {({ geographies }) =>
-                            geographies.map((geo) => (
-                              <Geography key={geo.rsmKey} geography={geo} fill="#1a1a1c" stroke="#575757" />
-                            ))
-                          }
-                        </Geographies>
+                  <ComposableMap projection="geoMercator" style={{ width: '100%', height: '100%' }}>
+      <ZoomableGroup zoom={1} center={[0, 0]}>
+        <Geographies geography={worldGeoURL}>
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography key={geo.rsmKey} geography={geo} fill="#1a1a1c" stroke="#575757" />
+            ))
+          }
+        </Geographies>
 
-                        {/* Render markers if coordinates array is not null */}
-                        {coordinates && coordinates.map((location) => (
-                          <Marker coordinates={[location.coordinates[0], location.coordinates[1]]}>
-                            <circle r={0} fill="#F00" />
-                            <path
-                              d="M12 0C5.37 0 0 5.37 0 12c0 7.31 5.35 12.37 11.74 20.29a1 1 0 0 0 1.52 0C18.65 24.37 24 19.31 24 12c0-6.63-5.37-12-12-12zm0 17.33a5.32 5.32 0 1 1 0-10.64 5.32 5.32 0 0 1 0 10.64zm.67-8.25h-.96v3.95l2.67 1.6.48-.8-2.19-1.31v-3.94z"
-                              fill="#FF0000"
-                            />
+                      {coordinates &&
+                        coordinates.map((location) => (
+                          <Marker key={location.id} coordinates={[location.coordinates[0], location.coordinates[1]]}>
+                                <a href="#" onClick={() => togglePopup(location)}>
+                              <circle r={2} fill="#F00" />
+                            </a>
                           </Marker>
                         ))}
-                      </ZoomableGroup>
-                    </ComposableMap>
-                  </div>
+
+                      {showPopup && selectedLocation && (
+                        <div className="popup-container">
+                          <div className="popup">
+                            <h3>{selectedLocation.name}</h3>
+                            <button className="close-button" onClick={togglePopup}>
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </ZoomableGroup>
+                  </ComposableMap>
+                </div>
+
                 </div>
                 <div class="pie-chart">
                 <Chart

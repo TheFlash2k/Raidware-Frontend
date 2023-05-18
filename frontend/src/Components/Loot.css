@@ -30,7 +30,7 @@
     position: absolute;
     width: 100px;
     height: 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
     top: 25px;
     left: 50px;
     transition: 0.5s ease-in-out;
@@ -253,7 +253,7 @@
     height: 30px;
     text-align: start;
     color: #333;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 12px;
     transition: 0.3s ease-in-out;
   }

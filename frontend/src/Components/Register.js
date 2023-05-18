@@ -3,7 +3,7 @@ import logo from './resources/rd-01.png';
 import logo_inverted from './resources/rd-01 inverted.png';
 import './styles/Register.css'
 import axios from "axios";
-import { showPopup, hidePopup } from "./Popup";
+import { showPopup, hidePopup } from "./utils/Popup";
 import './styles/Popup.css'
 
 export default function Register() {

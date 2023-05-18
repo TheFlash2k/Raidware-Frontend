@@ -5,7 +5,7 @@ import rd03 from './resources/rd-01.png';
 import dark_logo from './resources/rd-01 inverted.png';
 import './styles/Listeners.css'
 import axios from "axios";
-import { showPopup, hidePopup } from "./Popup";
+import { showPopup, hidePopup } from "./utils/Popup";
 import './styles/Popup.css'
 
 export default function Listeners() {
@@ -264,7 +264,6 @@ export default function Listeners() {
 							<a href="/agents"><i class="fa-solid fa-users"></i> &nbsp; &nbsp; Agents</a>
 							<a href="/loot"><i class="fa-solid fa-coins"></i> &nbsp; &nbsp; Loot</a>
 							<a href="/users"><i class="fa-solid fa-user"></i> &nbsp; &nbsp; Users</a>
-							<a href="/settings"><i class="fa-solid fa-gear"></i> &nbsp; &nbsp; Settings</a>
 							<a href="/logout" className="logout"><i className="fa-solid fa-right-from-bracket"></i> &nbsp; &nbsp; Log-out</a>
           </div>
                     </div>

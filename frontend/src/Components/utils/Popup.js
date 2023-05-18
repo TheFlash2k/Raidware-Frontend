@@ -1,4 +1,4 @@
-import './styles/Popup.css';
+import '../styles/Popup.css';
 
 const hidePopup = () => {
     const err_popup = document.getElementById('err-popup');

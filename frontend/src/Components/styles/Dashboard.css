@@ -243,8 +243,8 @@
     padding: 10px 55px;
   }
   .total-user-map{
-    border-radius: 8px;
-    overflow: hidden;
+    border-radius: 5px;
+    overflow: visible;
     height: 600px;
   }
   .pie-chart{
@@ -418,5 +418,34 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+  
+  .popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+  
+  .popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .close-button {
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
   }
   

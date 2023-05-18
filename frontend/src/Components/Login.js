@@ -3,7 +3,7 @@ import rd04 from './resources/rd-01 inverted.png';
 import './styles/Login.css'
 import axios from "axios";
 import { useEffect, useState } from 'react';
-import { showPopup, hidePopup } from "./Popup";
+import { showPopup, hidePopup } from "./utils/Popup";
 import './styles/Popup.css'
 
 
