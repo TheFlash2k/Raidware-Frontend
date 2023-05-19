@@ -85,6 +85,55 @@ export default function Loot() {
             body.classList.toggle("dark-mode");
         }
 
+        const handleCreateLoot = () => {
+          const createFormPage = document.getElementById('createFormPage');
+          createFormPage.classList.toggle('top-position');
+        }
+
+        const handleCreateLootSubmit = () => {
+          const name = document.getElementById('name');
+          const type = document.getElementById('type');
+          const value = document.getElementById('value');
+          const description = document.getElementById('description');
+
+          const url = localStorage.getItem('url') + "/loot";
+          const data = {
+            name: name.value,
+            type: type.value,
+            value: value.value,
+            description: description.value
+          }
+
+          axios.post(url, data, {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+          }).then((response) => {
+            console.log(response.data);
+            window.location.reload();
+          }).catch((error) => {
+            console.log(error);
+          });
+        }
+
+        const handleDelete = (e, id) => {
+          e.preventDefault();
+          const url = localStorage.getItem('url') + "/remove-loot";
+          const data = {
+            id: id
+          }
+
+          axios.post(url, data, {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+          }).then((response) => {
+            console.log(response.data);
+            window.location.reload();
+          }).catch((error) => {
+            console.log(error);
+          });
+        }
     return(
         <div class="main">
         <div class="form-page" id="createFormPage">
@@ -106,14 +155,14 @@ export default function Loot() {
           </div>
           <form class="form">
             <div class="form-scroll">
-              <input class="input-create-loot" type="text" placeholder="Name" required="required" />
-              <select name="Type" id="protocol">
+              <input class="input-create-loot" type="text" id="name" placeholder="Name" required="required" />
+              <select name="Type" id="type">
                 <option value="Password">Password</option>
                 <option value="Hash">Hash</option>
               </select>
-            <input class="input-create-loot" type="text" placeholder="Content" required="required" />
-            <input class="input-create-loot" type="text" placeholder="Description" required="required" />
-            <input type="submit" value="Submit" class="sub-loot" />
+            <input class="input-create-loot" id="value" type="text" placeholder="Content" required="required" />
+            <input class="input-create-loot" id="description" type="text" placeholder="Description" required="required" />
+            <input type="submit" onClick={handleCreateLootSubmit} value="Submit" class="sub-loot" />
             </div>
           </form>
         </div>
@@ -156,7 +205,7 @@ export default function Loot() {
             <div class="content" id="content">
               <div class="loot">
                 <h2 class="heading" id="mySection">Loot</h2>
-                <button class="create" id="create">Add Loot</button>
+                <button class="create" onClick={handleCreateLoot} id="create">Add Loot</button>
               </div>
               <div class="loot-menu">
                 <div class="id loot-menu-child">
@@ -188,11 +237,8 @@ export default function Loot() {
                   <div class="dummy-child">{loot.value}</div>
                   <div class="dummy-child" >{loot.description}</div>
                     <div class="dummy-child icons-dummy">
-                      <div class="edit-dummy dummy-icon">
-                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                      </div>
                       <div class="delete-dummy dummy-icon">
-                        <i class="fa-solid fa-trash fa-lg"></i>
+                        <i onClick={e => handleDelete(e, loot.id)} class="fa-solid fa-trash fa-lg"></i>
                       </div>
                     </div>
                   </div>
